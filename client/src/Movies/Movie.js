@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
-
+import SavedList from "./SavedList";
 export const Movie = props => {
   const [movie, setMovie] = useState({});
 
@@ -20,12 +20,20 @@ export const Movie = props => {
       });
   }, [props.match.params.id]);
 
-  // Uncomment this only when you have moved on to the stretch goals
-  // const saveMovie = () => {
-  //   const addToSavedList = props.addToSavedList;
-  //   addToSavedList(movie)
-  // }
-  return <MovieCard movie={movie} />;
+  const saveMovie = () => {
+    const addToSavedList = props.addToSavedList;
+    addToSavedList(movie);
+  };
+
+  return (
+    <div className="save-wrapper">
+      <MovieCard movie={movie} />
+
+      <div className="save-button" onClick={() => saveMovie()}>
+        Save
+      </div>
+    </div>
+  );
 };
 
 export default Movie;
